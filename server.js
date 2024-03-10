@@ -13,9 +13,9 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 
 // Get the directory name of the main module
-const __dirname = path.dirname(__filename);
+const namedir = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(namedir, './client/build')));
 
 // Create a pool for database connection
 const pool = mysql.createPool({

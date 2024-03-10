@@ -12,7 +12,7 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-const __fileurl = fileURLToPath(import.meta.url);
+const __fileurl =fileURLToPath(__fileurl);
 const __dirname = path.dirname(__fileurl);
 
 app.use(express.static(path.join(__dirname, './client/build')));

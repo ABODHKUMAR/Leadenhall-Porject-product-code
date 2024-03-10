@@ -15,7 +15,7 @@ app.use(express.json());
 // Get the directory name of the main module
 const namedir = path.dirname(__filename);
 
-app.use(express.static(path.join(namedir, './client/build')));
+app.use(express.static(path.join(namedir, './client/build/index.html')));
 
 // Create a pool for database connection
 const pool = mysql.createPool({

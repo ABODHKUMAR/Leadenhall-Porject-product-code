@@ -7,14 +7,12 @@ const { OpenAI } = require("openai");
 dotenv.config();
 const app = express();
 const path = require("path");
-const { fileURLToPath } = require("url");
 app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
 // Get the directory name of the main module
-const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, './client/build')));

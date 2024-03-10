@@ -12,10 +12,13 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-const __fileurl =fileURLToPath(__fileurl);
-const __dirname = path.dirname(require.main.filename);
 
-app.use(express.static(path.join(__dirname, './client/build')));
+// Get the directory name of the main module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Serve static files from the client/build directory
+app.use(express.static(path.join(__dirname, 'client', 'build')));
 
 // Create a pool for database connection
 const pool = mysql.createPool({
@@ -48,7 +51,7 @@ function startServer() {
     // Endpoint to handle natural language queries
     app.post('/query', async (req, res) => {
         let { query } = req.body;
-        query = "Write a SQL query which computes " + query ;
+        query = "Write a SQL query which computes " + query;
         try {
             // Step 1: Convert natural language query to SQL using AI
             const chatCompletion = await openai.chat.completions.create({
@@ -77,7 +80,7 @@ function startServer() {
             if (chatCompletion && chatCompletion.choices && chatCompletion.choices.length > 0) {
                 let sqlQuery = chatCompletion.choices[0].message.content;
                 console.log("Generated SQL Query:", sqlQuery);
-      
+
                 // Check if the SQL query is a SELECT query
                 if (!sqlQuery.toLowerCase().includes("select")) {
                     // Respond with a default message if it's not a SELECT query

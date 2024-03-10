@@ -15,7 +15,7 @@ app.use(express.json());
 const __fileurl =fileURLToPath(__fileurl);
 const __dirname = path.dirname(require.main.filename);
 
-app.use(express.static(path.join(__dirname, './client/build')));
+app.use(express.static(path.join(__dirname, './client/build/index.html')));
 
 // Create a pool for database connection
 const pool = mysql.createPool({
